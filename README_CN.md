@@ -104,7 +104,7 @@ python eval_streaming.py --context_len 102400
 
 ## 📦 预训练权重
 
-由于文件大小限制，预训练权重 (~200M params) 可从 Hugging Face 下载：
+由于文件大小限制，预训练权重可从 Hugging Face 下载：
 [预训练模型](https://huggingface.co/Shutong-Hou/Bilinear-Memory-Machine-V1/tree/main)
 
 ## 📄 许可证
