@@ -26,14 +26,14 @@ BMM processes sequences through stacked Bilinear Memory Blocks. Each block integ
 3. **Temporal Loop**: A lightweight one-tap causal shift that mixes adjacent time steps, providing sequence order inductive bias while maintaining full parallelism.
 
 <p align="center">
-  <img src="assets/bilinear.png" width="30%" alt="Bilinear Interaction">
-  <img src="assets/memory.png" width="30%" alt="Memory Slots">
-  <img src="assets/temporal.png" width="30%" alt="Temporal Loop">
+  <img src="https://github.com/user-attachments/assets/b57f2973-9a38-4378-bc8a-a04fd147ab90" width="30%" alt="Bilinear Interaction">
+  <img src="https://github.com/user-attachments/assets/c1fd33c5-36c5-4601-a639-9478592a79e8" width="30%" alt="Memory Slots">
+  <img src="https://github.com/user-attachments/assets/1a7a4a69-f067-4199-9f43-5f8f17f97e29" width="30%" alt="Temporal Loop">
 </p>
 <p align="center"><em>Conceptual visualization of BMM core components.</em></p>
 
 <p align="center">
-  <img src="assets/architecture.png" alt="BMM Architecture" width="80%">
+  <img src="https://github.com/user-attachments/assets/6668010b-1839-4b41-99bb-d8e89dbf7995" alt="BMM Architecture" width="80%">
 </p>
 <p align="center"><em>Detailed architecture of the Bilinear Memory Block.</em></p>
 
@@ -45,17 +45,24 @@ BMM demonstrates decisive advantages in computational efficiency and long-contex
 BMM maintains strictly constant memory and high throughput, while Transformer OOMs and Mamba's memory grows with context length.
 
 <p align="center">
-  <img src="assets/efficiency.png" alt="Inference Efficiency" width="90%">
+  <img src="https://github.com/user-attachments/assets/c28b6ae7-4515-48c4-877b-b2ba812c63ec" alt="Inference Efficiency" width="90%">
+</p>
+
+### Long-Context Generalization
+BMM maintains stable perplexity as sequence length increases, while Transformer collapses beyond 2K tokens.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/28fd0d1f-d76c-4aec-bd5b-b71998ecb7a9" alt="Long-Range PPL" width="75%">
 </p>
 
 ### Training Dynamics & Mechanism Diagnostics
 <p align="center">
-  <img src="assets/training_curves.png" alt="Training Curves" width="75%">
+  <img src="https://github.com/user-attachments/assets/0d6cc687-98da-4863-95c4-bf9c9f6a4b8c" alt="Training Curves" width="75%">
 </p>
 <p align="center"><em>Validation perplexity trajectories during 50,000 training steps.</em></p>
 
 <p align="center">
-  <img src="assets/mechanism.png" alt="Mechanism Diagnostics" width="90%">
+  <img src="https://github.com/user-attachments/assets/d3628d46-4530-4c32-a0ee-8886afcc0ff0" alt="Mechanism Diagnostics" width="90%">
 </p>
 <p align="center"><em>Mechanism diagnostics. Left: Memory slot semantic clustering. Right: Temporal loop alpha distribution across layers.</em></p>
 
@@ -96,12 +103,12 @@ python eval_streaming.py --context_len 102400
 - `evaluate.py`: Script to reproduce main PPL and efficiency results.
 - `eval_streaming.py`: Script for 100K extreme streaming generation test.
 - `run_ablations.py`: Script for architecture ablation studies.
-- `assets/`: Architecture diagrams and performance charts.
+- `mechanism_diagnosis.py`: Script for mechanism diagnostics.
 
 ## 📦 Pre-trained Checkpoints
 
-Due to file size limits, pre-trained checkpoints (~200M params) can be downloaded from:
-[Download Link Here - e.g., Google Drive or HuggingFace]
+Due to file size limits, pre-trained checkpoints (~200M params) can be downloaded from Hugging Face:
+[Pre-trained Models](https://huggingface.co/Shutong-Hou/Bilinear-Memory-Machine-V1/tree/main)
 
 ## 📄 License
 
