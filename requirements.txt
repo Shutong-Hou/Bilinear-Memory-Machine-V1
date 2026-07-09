@@ -1,0 +1,9 @@
+torch
+numpy
+datasets
+tiktoken
+transformers
+mamba-ssm
+matplotlib
+seaborn
+scikit-learn

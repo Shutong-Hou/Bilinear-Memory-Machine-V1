@@ -1,23 +1,41 @@
 # BMM: Bilinear Memory Machine
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-green.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 
-BMM is a pure attention-free architecture for efficient long-context sequence modeling. It eliminates dot-product attention, softmax, and convolution entirely, relying instead on bilinear state interactions, dynamic memory slots, and temporal loops.
+[English](./README.md) | [简体中文](./README_CN.md)
+
+---
+
+BMM is a pure attention-free architecture for efficient long-context sequence modeling. It eliminates dot-product attention, softmax, and convolution entirely, relying instead on bilinear state interactions, dynamic memory slots, and temporal loops. BMM achieves strict $O(1)$ inference memory and 3x higher throughput than Mamba.
 
 ## 🌟 Key Features
 
 - **Pure Attention-Free**: No QKV dot-product, no softmax, no gated recurrence. Relies purely on bilinear operations and gating.
-- **Strict O(1) Inference Memory**: Maintains a constant memory footprint (~1.5GB) during autoregressive generation, regardless of context length.
+- **Strict $O(1)$ Inference Memory**: Maintains a constant memory footprint (~1.5GB) during autoregressive generation, regardless of context length.
 - **Extreme Throughput**: Achieves ~400 tokens/s, yielding 3x higher throughput than Mamba and remaining OOM-free at 100K context lengths.
 - **Parallel Training**: Highly optimized matrix operations allow for 2x faster training compared to equivalent Transformers.
 
 ## 🏗️ Architecture
 
-BMM processes sequences through stacked Bilinear Memory Blocks. Each block integrates a temporal loop, a low-rank bilinear state interaction, and a gated memory read mechanism.
+BMM processes sequences through stacked Bilinear Memory Blocks. Each block integrates three novel components to capture sequence dependencies without recurrent scans or quadratic attention:
+
+1. **Bilinear Interaction**: Fuses input and hidden state via a low-rank bilinear product, capturing second-order interactions in $O(TDrS)$ time.
+2. **Memory Slots**: Acts as an explicit external knowledge base with gated read operations, decoupling long-term storage from short-term dynamic processing.
+3. **Temporal Loop**: A lightweight one-tap causal shift that mixes adjacent time steps, providing sequence order inductive bias while maintaining full parallelism.
+
+<p align="center">
+  <img src="assets/bilinear.png" width="30%" alt="Bilinear Interaction">
+  <img src="assets/memory.png" width="30%" alt="Memory Slots">
+  <img src="assets/temporal.png" width="30%" alt="Temporal Loop">
+</p>
+<p align="center"><em>Conceptual visualization of BMM core components.</em></p>
 
 <p align="center">
   <img src="assets/architecture.png" alt="BMM Architecture" width="80%">
 </p>
+<p align="center"><em>Detailed architecture of the Bilinear Memory Block.</em></p>
 
 ## 📊 Performance
 
@@ -30,12 +48,16 @@ BMM maintains strictly constant memory and high throughput, while Transformer OO
   <img src="assets/efficiency.png" alt="Inference Efficiency" width="90%">
 </p>
 
-### Long-Context Generalization
-BMM maintains stable perplexity as sequence length increases, while Transformer collapses beyond 2K tokens.
+### Training Dynamics & Mechanism Diagnostics
+<p align="center">
+  <img src="assets/training_curves.png" alt="Training Curves" width="75%">
+</p>
+<p align="center"><em>Validation perplexity trajectories during 50,000 training steps.</em></p>
 
 <p align="center">
-  <img src="assets/long_ppl.png" alt="Long-Range PPL" width="70%">
+  <img src="assets/mechanism.png" alt="Mechanism Diagnostics" width="90%">
 </p>
+<p align="center"><em>Mechanism diagnostics. Left: Memory slot semantic clustering. Right: Temporal loop alpha distribution across layers.</em></p>
 
 ## 🛠️ Installation
 
@@ -74,6 +96,7 @@ python eval_streaming.py --context_len 102400
 - `evaluate.py`: Script to reproduce main PPL and efficiency results.
 - `eval_streaming.py`: Script for 100K extreme streaming generation test.
 - `run_ablations.py`: Script for architecture ablation studies.
+- `assets/`: Architecture diagrams and performance charts.
 
 ## 📦 Pre-trained Checkpoints
 
@@ -83,6 +106,3 @@ Due to file size limits, pre-trained checkpoints (~200M params) can be downloade
 ## 📄 License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-3.  **清理旧文件**：把之前那些 `train_bmm_v1.py`, `test_xxx.py` 等中间过程的废弃脚本删掉，只保留能直接运行且对应论文实验的干净脚本。
-
-按照这个标准建立的仓库，一眼看过去就是一个成熟的、有潜力的新架构，非常吸引人！
