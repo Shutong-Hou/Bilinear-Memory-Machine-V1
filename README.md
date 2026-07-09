@@ -101,7 +101,7 @@ python eval_streaming.py --context_len 102400
 ## 📦 Pre-trained Checkpoints
 
 Due to file size limits, pre-trained checkpoints can be downloaded from:
-[[Download](https://huggingface.co/Shutong-Hou/Bilinear-Memory-Machine-V1)]
+[[Hugging Face](https://huggingface.co/Shutong-Hou/Bilinear-Memory-Machine-V1)]
 
 ## 📄 License
 
