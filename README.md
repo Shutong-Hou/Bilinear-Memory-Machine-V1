@@ -26,9 +26,9 @@ BMM processes sequences through stacked Bilinear Memory Blocks. Each block integ
 3. **Temporal Loop**: A lightweight one-tap causal shift that mixes adjacent time steps, providing sequence order inductive bias while maintaining full parallelism.
 
 <p align="center">
-  <img src="assets/bilinear.png" width="30%" alt="Bilinear Interaction">
-  <img src="assets/memory.png" width="30%" alt="Memory Slots">
-  <img src="assets/temporal.png" width="30%" alt="Temporal Loop">
+  <img width="1965" height="670" alt="Image" src="https://github.com/user-attachments/assets/bc59c90a-7c5e-481a-8e8b-23feada7752e" width="30%" alt="Bilinear Interaction">
+  <img width="969" height="670" alt="Image" src="https://github.com/user-attachments/assets/8bc04a0a-a691-45de-9fe7-7b44a1d6a788" width="30%" alt="Memory Slots">
+  <img width="1938" height="670" alt="Image" src="https://github.com/user-attachments/assets/748fbdc3-cd25-4a10-beb7-bf5d22942c9f" width="30%" alt="Temporal Loop">
 </p>
 <p align="center"><em>Conceptual visualization of BMM core components.</em></p>
 
