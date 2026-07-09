@@ -48,7 +48,3 @@ If you find this work useful, please cite:
   year={2026}
 }
 ```
-
-```
-
-按照这个结构整理你的 GitHub 仓库，不仅审稿人复现时一目了然，未来如果有其他研究者引用你的工作，也会显得极其专业！
